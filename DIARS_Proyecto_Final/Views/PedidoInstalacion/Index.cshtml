@@ -1,0 +1,42 @@
+﻿@model DIARS_Proyecto_Final.Models.PedidoInstalacion
+
+@{
+    ViewData["Title"] = "Registrar Pedido de Instalación";
+}
+
+<h1>Registrar Pedido de Instalación</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="contrato_id" class="form-label">ID Contrato</label>
+        <input type="number" class="form-control" id="contrato_id" name="contrato_id" value="@Model.contrato_id" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="empleado_id" class="form-label">ID Empleado</label>
+        <input type="number" class="form-control" id="empleado_id" name="empleado_id" value="@Model.empleado_id" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="fecha_instalacion" class="form-label">Fecha de Instalación</label>
+        <input type="date" class="form-control" id="fecha_instalacion" name="fecha_instalacion" value="@(Model.fecha_instalacion?.ToString("yyyy-MM-dd") ?? "")" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="estado_instalacion" class="form-label">Estado</label>
+        <select class="form-select" id="estado_instalacion" name="estado_instalacion">
+            <option value="Pendiente" selected="@(Model.estado_instalacion == "Pendiente" ? "selected" : null)">Pendiente</option>
+            <option value="Completado" selected="@(Model.estado_instalacion == "Completado" ? "selected" : null)">Completado</option>
+            <option value="Cancelado" selected="@(Model.estado_instalacion == "Cancelado" ? "selected" : null)">Cancelado</option>
+
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label for="observaciones" class="form-label">Observaciones</label>
+        <textarea class="form-control" id="observaciones" name="observaciones" rows="3">@Model.observaciones</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

@@ -1,8 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Página Principal";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="jumbotron">
+    <h1 class="display-4">Bienvenido a la Biblioteca Virtual</h1>
+    <p class="lead">Gestiona tus libros, autores, categorías y editoriales desde aquí.</p>
+    <hr class="my-4">
+    <p>Haz clic en cualquiera de los enlaces a continuación para empezar a gestionar los datos.</p>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>Autores</h4>
+            </div>
+            <div class="card-body">
+                <p>Gestiona la información de los autores.</p>
+                <a href="@Url.Action("Index", "Empleado")" class="btn btn-primary">Ir a Autores</a>
+            </div>
+        </div>
+    </div>
 </div>
