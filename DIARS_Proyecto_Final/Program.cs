@@ -1,9 +1,11 @@
 using DIARS_Proyecto_Final.Data;
-using Microsoft.EntityFrameworkCore;
 using DIARS_Proyecto_Final.Repositories;
 using DIARS_Proyecto_Final.Repositories.Interfaces;
-using DIARS_Proyecto_Final.Services;
 using DIARS_Proyecto_Final.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using pruevas_diars_fabricio_0001.Repositories;
+using pruevas_diars_fabricio_0001.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
