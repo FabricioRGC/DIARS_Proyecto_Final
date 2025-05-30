@@ -1,0 +1,83 @@
+﻿@model List<DIARS_Proyecto_Final.Models.Empleado>
+@{
+    ViewData["Title"] = "Listado de Empleados";
+}
+<h2>Empleados</h2>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a asp-action="Agregar" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Agregar Nuevo
+        </a>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table">
+                <tr>
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                    <th>Cargo</th>
+                    <th>Estado</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th class="text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var emp in Model)
+                {
+                    <tr>
+                        <td>@emp.nombres</td>
+                        <td>@emp.dni</td>
+                        <td>@emp.Cargo?.titulo_cargo</td>
+                        <td>
+                            <span class="badge @(emp.estado == "activo" ? "bg-success" : "bg-secondary")">
+                                @emp.estado
+                            </span>
+                        </td>
+                        <td>@(emp.fecha_inicio?.ToString("dd/MM/yyyy") ?? "N/A")</td>
+                        <td>@(emp.fecha_fin?.ToString("dd/MM/yyyy") ?? "N/A")</td>
+                        <td class="text-center">
+                            <div class="btn-group btn-group-sm" role="group" style="white-space: nowrap;">
+                                <a asp-action="Editar" asp-route-id="@emp.empleado_id"
+                                   class="btn btn-warning">
+                                    Editar
+                                </a>
+
+                                @if (emp.estado == "activo")
+                                {
+                                    <a asp-action="InhabilitarEmpleado" asp-route-id="@emp.empleado_id"
+                                       class="btn btn-danger" title="Inhabilitar"
+                                       onclick="return confirm('¿Está seguro que desea inhabilitar este empleado?');">
+                                        <i class="bi bi-person-x"></i> Inhabilitar
+                                    </a>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-secondary" disabled title="Ya está inhabilitado">
+                                        <i class="bi bi-person-x"></i> Inhabilitado
+                                    </button>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@section Styles {
+    <style>
+        .table th {
+            white-space: nowrap;
+        }
+        .badge {
+            font-size: 0.9em;
+            padding: 0.35em 0.65em;
+        }
+    </style>
+}

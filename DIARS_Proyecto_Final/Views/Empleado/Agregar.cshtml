@@ -1,0 +1,101 @@
+﻿@model DIARS_Proyecto_Final.Models.Empleado
+@{
+    ViewData["Title"] = "Agregar Empleado";
+}
+
+<div class="container">
+    <h2 class="mb-4">@ViewData["Title"]</h2>
+
+    <form asp-action="AgregarEmpleado" method="post" class="needs-validation" novalidate>
+        @Html.AntiForgeryToken()
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-4"></div>
+
+        <!-- Campos del formulario -->
+        <div class="form-group mb-3">
+            <label asp-for="cargo_id" class="form-label fw-bold">Cargo</label>
+            <select asp-for="cargo_id" asp-items="ViewBag.Cargos" class="form-control" required>
+                <option value="">-- Selecciona --</option>
+            </select>
+            <span asp-validation-for="cargo_id" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="nombres" class="form-label fw-bold">Nombre Completo</label>
+            <input asp-for="nombres" class="form-control" required />
+            <span asp-validation-for="nombres" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="dni" class="form-label fw-bold">DNI</label>
+            <input asp-for="dni" class="form-control" required maxlength="8" />
+            <span asp-validation-for="dni" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="telefono" class="form-label fw-bold">Teléfono</label>
+            <input asp-for="telefono" class="form-control" maxlength="9" />
+            <span asp-validation-for="telefono" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="correo" class="form-label fw-bold">Correo Electrónico</label>
+            <input asp-for="correo" type="email" class="form-control" />
+            <span asp-validation-for="correo" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="password" class="form-label fw-bold">Contraseña</label>
+            <input asp-for="password" type="password" class="form-control" required minlength="6" />
+            <span asp-validation-for="password" class="text-danger small"></span>
+            <small class="form-text text-muted">Mínimo 6 caracteres</small>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="estado" class="form-label fw-bold">Estado</label>
+            <select asp-for="estado" class="form-control" required>
+                <option value="">-- Selecciona estado --</option>
+                <option value="activo">Activo</option>
+                <option value="inhabilitado">Inhabilitado</option>
+            </select>
+            <span asp-validation-for="estado" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="fecha_inicio" class="form-label fw-bold">Fecha Inicio</label>
+            <input asp-for="fecha_inicio" type="date"
+                   class="form-control"
+                   value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+            <span asp-validation-for="fecha_inicio" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="mesesDuracion" class="form-label fw-bold">Duración en Meses</label>
+            <input name="mesesDuracion" type="number" class="form-control" min="1" required />
+            <small class="form-text text-muted">Número de meses a partir de la fecha de inicio</small>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex justify-content-between">
+            <a asp-action="MostrarEmpleados" class="btn btn-secondary px-4">Cancelar</a>
+            <button type="submit" class="btn btn-primary px-4">Guardar</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Validación del lado del cliente para fecha_inicio
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const fechaInicio = document.getElementById('fecha_inicio').value;
+            if (!fechaInicio) {
+                e.preventDefault();
+                document.getElementById('fecha_inicio').classList.add('is-invalid');
+                document.querySelector('[data-valmsg-for="fecha_inicio"]').textContent = 'La fecha de inicio es requerida';
+            }
+        });
+    </script>
+}
