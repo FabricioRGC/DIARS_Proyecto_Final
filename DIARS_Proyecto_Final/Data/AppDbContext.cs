@@ -14,6 +14,7 @@ namespace DIARS_Proyecto_Final.Data
         // DbSets
         public DbSet<Cargo> Cargos { get; set; }
         public DbSet<Empleado> Empleados { get; set; }
+        public DbSet<PedidoInstalacion> PedidoInstalacion { get; set; }  // <-- Añadido
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -41,7 +42,6 @@ namespace DIARS_Proyecto_Final.Data
                 entity.ToTable("Empleado");
                 entity.HasKey(e => e.empleado_id);
 
-                // Configuración explícita de las columnas
                 entity.Property(e => e.cargo_id).HasColumnName("cargo_id");
                 entity.Property(e => e.nombres).HasColumnName("nombres").IsRequired().HasMaxLength(100);
                 entity.Property(e => e.dni).HasColumnName("dni").IsRequired().HasMaxLength(8);
@@ -51,11 +51,20 @@ namespace DIARS_Proyecto_Final.Data
                 entity.Property(e => e.estado).HasColumnName("estado").IsRequired().HasMaxLength(20);
                 entity.Property(e => e.fecha_inicio).HasColumnName("fecha_inicio");
                 entity.Property(e => e.fecha_fin).HasColumnName("fecha_fin");
-
-                // Configuración de la relación (ya definida en Cargo)
             });
 
-        }
+            // Configuración para PedidoInstalacion
+            modelBuilder.Entity<PedidoInstalacion>(entity =>
+            {
+                entity.ToTable("PedidoInstalacion");
+                entity.HasKey(p => p.pedido_id);
 
+                entity.Property(p => p.contrato_id).IsRequired();
+                entity.Property(p => p.empleado_id).IsRequired();
+                entity.Property(p => p.fecha_instalacion).HasColumnType("datetime");
+                entity.Property(p => p.estado_instalacion).HasMaxLength(20);
+                entity.Property(p => p.observaciones).HasMaxLength(255);
+            });
+        }
     }
 }
