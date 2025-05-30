@@ -1,0 +1,51 @@
+﻿@model IEnumerable<DIARS_Proyecto_Final.Models.Equipo>
+
+@{
+    ViewData["Title"] = "Administración de Equipos";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="mb-3">
+    <a class="btn btn-primary" href="@Url.Action("Agregar", "Equipo")">➕ Agregar Nuevo Equipo</a>
+    <a class="btn btn-info" href="@Url.Action("AumentarStock", "Equipo")">📦 Aumentar Stock</a>
+</div>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Stock</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var equipo in Model)
+        {
+            <tr>
+                <td>@equipo.NombreEquipo</td>
+                <td>@equipo.Descripcion</td>
+                <td>@equipo.CantidadStock</td>
+                <td>
+                    @if (equipo.Estado == "activo")
+                    {
+                        <span class="badge bg-success">Activo</span>
+                    }
+                    else if (equipo.Estado == "inactivo")
+                    {
+                        <span class="badge bg-secondary">Inactivo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">@equipo.Estado</span>
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-warning" href="@Url.Action("Editar", "Equipo", new { id = equipo.EquipoId })">✏️ Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

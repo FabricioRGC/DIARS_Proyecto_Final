@@ -1,0 +1,14 @@
+﻿@model DIARS_Proyecto_Final.Models.Equipo
+
+<h2>Agregar Nuevo Equipo</h2>
+<form asp-action="AgregarEquipo" method="post">
+    <label>Nombre del Equipo:</label>
+    <input asp-for="NombreEquipo" required /><br />
+    <label>Descripción:</label>
+    <input asp-for="Descripcion" /><br />
+    <label>Cantidad en Stock:</label>
+    <input asp-for="CantidadStock" type="number" required /><br />
+    <label>Estado:</label>
+    <input asp-for="Estado" value="activo" /><br />
+    <button type="submit">Guardar</button>
+</form>

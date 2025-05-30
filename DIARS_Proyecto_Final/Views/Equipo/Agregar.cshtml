@@ -1,0 +1,59 @@
+﻿@model DIARS_Proyecto_Final.Models.Equipo
+
+@{
+    ViewData["Title"] = Model.EquipoId == 0 ? "Agregar Nuevo Equipo" : "Editar Equipo";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="AgregarEditar" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="NombreEquipo" class="form-label">Nombre del Equipo <span class="text-danger">*</span></label>
+        <input asp-for="NombreEquipo" class="form-control" required />
+        <div class="invalid-feedback">Por favor ingresa el nombre del equipo.</div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Descripcion" class="form-label">Descripción</label>
+        <textarea asp-for="Descripcion" class="form-control" rows="3"></textarea>
+    </div>
+
+    @* Mostrar cantidad stock solo si es nuevo registro (Agregar) *@
+    @if (Model.EquipoId == 0)
+    {
+        <div class="mb-3">
+            <label asp-for="CantidadStock" class="form-label">Cantidad en Stock <span class="text-danger">*</span></label>
+            <input asp-for="CantidadStock" type="number" min="0" class="form-control" required />
+            <div class="invalid-feedback">Por favor ingresa la cantidad en stock.</div>
+        </div>
+    }
+
+    <div class="mb-3">
+        <label asp-for="Estado" class="form-label">Estado</label>
+        <select asp-for="Estado" class="form-select">
+            <option value="activo" selected>Activo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancelar</a>
+</form>
+
+@section Scripts {
+    <script>
+        // Bootstrap 5 validation
+        (() => {
+            'use strict'
+            const forms = document.querySelectorAll('.needs-validation')
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+}

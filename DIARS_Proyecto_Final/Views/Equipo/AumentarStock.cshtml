@@ -1,0 +1,28 @@
+﻿@model List<DIARS_Proyecto_Final.Models.Equipo>
+
+@{
+    ViewData["Title"] = "Aumentar Stock";
+}
+
+<h2>Aumentar Stock</h2>
+
+<form asp-action="AumentarStock" method="post">
+    <div class="form-group">
+        <label for="equipoId">Equipo:</label>
+        <select name="equipoId" class="form-control" required>
+            <option value="">Seleccione un equipo</option>
+            @foreach (var equipo in Model)
+            {
+                <option value="@equipo.EquipoId">@equipo.NombreEquipo</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="cantidad">Cantidad a aumentar:</label>
+        <input type="number" name="cantidad" class="form-control" required min="1" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Aumentar</button>
+    <a asp-action="Administrar" class="btn btn-secondary">Volver</a>
+</form>

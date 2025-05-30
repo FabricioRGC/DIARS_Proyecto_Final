@@ -1,9 +1,9 @@
 using DIARS_Proyecto_Final.Data;
 using Microsoft.EntityFrameworkCore;
-//using DIARS_Proyecto_Final.Repositories;
-//using DIARS_Proyecto_Final.Repositories.Interfaces;
-//using DIARS_Proyecto_Final.Services;
-//using DIARS_Proyecto_Final.Services.Interfaces;
+using DIARS_Proyecto_Final.Repositories;
+using DIARS_Proyecto_Final.Repositories.Interfaces;
+using DIARS_Proyecto_Final.Services;
+using DIARS_Proyecto_Final.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,13 +12,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // 2) Registrar repositorios
-//builder.Services.AddScoped<IContratoEquipoRepository, ContratoEquipoRepository>();
-//builder.Services.AddScoped<IEquipoRepository, EquipoRepository>();
+builder.Services.AddScoped<IContratoEquipoRepository, ContratoEquipoRepository>();
+builder.Services.AddScoped<IEquipoRepository, EquipoRepository>();
 //// (y el resto de tus repositorios...)
 
 //// 3) Registrar servicios
-//builder.Services.AddScoped<IContratoEquipoService, ContratoEquipoService>();
-//builder.Services.AddScoped<IEquipoService, EquipoService>();
+builder.Services.AddScoped<IContratoEquipoService, ContratoEquipoService>();
+builder.Services.AddScoped<IEquipoService, EquipoService>();
 
 // (y los demás servicios que hayas creado)
 

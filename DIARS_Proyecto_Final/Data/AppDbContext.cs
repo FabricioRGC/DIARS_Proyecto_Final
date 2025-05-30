@@ -13,7 +13,15 @@ namespace DIARS_Proyecto_Final.Data
 
         // DbSets
         public DbSet<Cargo> Cargos { get; set; }
+        //public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Empleado> Empleados { get; set; }
+        //public DbSet<ZonaCobertura> ZonaCoberturas { get; set; }
+        //public DbSet<PlanServicio> PlanServicios { get; set; }
+        public DbSet<Equipo> Equipos { get; set; }
+        //public DbSet<Contrato> Contratos { get; set; }
+        public DbSet<ContratoEquipo> ContratoEquipos { get; set; }
+        //public DbSet<Pago> Pagos { get; set; }
+        //public DbSet<PedidoInstalacion> PedidosInstalacion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
